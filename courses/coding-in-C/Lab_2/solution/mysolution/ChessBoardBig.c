@@ -6,9 +6,10 @@ int numCols = 8;
 void printLine(){
     printf("\n");
     for(int i=0; i<numCols;i++){
-        printf("%c" "+---");
+        printf("%c", "+");
+        printf("%c" "---");
+        printf("%c", "+");
     }
-    //printf("%c", "+");
 }
 
 int main(){
