@@ -7,5 +7,5 @@ int main(){
 
     printf("Zweite Element: %d Adresse: %d", *(pNum+1), pNum+1);
     printf("\nLetzte Elemet: %d Adresse: %d", *(pNum+length-1), pNum+length-1);
-    printf("\nDifferenz: %d", pNum+1 - pNum+length-1);
+    printf("\nDifferenz: %d", (pNum+length-1) - (pNum+1));
 }
