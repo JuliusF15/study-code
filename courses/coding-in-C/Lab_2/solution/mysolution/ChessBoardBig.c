@@ -13,10 +13,10 @@ void printLine(){
     printf("\n");
     printf("%c ", 32);
     for(int i=0; i<NUMCOLS;i++){
-        printf("%c", 43);
+        printf("%c", '+');
         printf("%c" "---");
     }
-    printf("%c", 43);
+    printf("%c", '+');
 
 }
 void printRows(){
