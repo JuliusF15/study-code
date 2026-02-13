@@ -16,14 +16,16 @@ int checkPalindrome(char string[]){
 }
 
 int main(){
-    char text[100];
+    char text[101];
     printf("\nGive me a Word. Max. 100 Characters: ");
-    fgets(text, sizeof(text), stdin);
-    text[strcspn(text, "\n")] = '\0';
-    int check = checkPalindrome(text);
-    if(check == 0){
-        printf("\n%s%s", text, " is not a Palindrome!");
+    if(!fgets(text, sizeof(text), stdin)){
+        printf("Wrong input!");
     }else{
-        printf("\n%s%s", text, " is a Palindrome!");
+        text[strcspn(text, "\n")] = '\0';
+        if(checkPalindrome(text)){
+            printf("\n%s%s", text, " is a Palindrome!");
+        }else{
+            printf("\n%s%s", text, " is not a Palindrome!");
+        }
     }
 }
