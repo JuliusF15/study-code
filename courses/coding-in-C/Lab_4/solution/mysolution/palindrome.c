@@ -4,7 +4,9 @@
 int checkPalindrome(char string[]){
     char *pstring = string;
     for(int i=0; i<strlen(string)/2; i++){
-        if(*(pstring+i) == *(pstring + (strlen(string)-i-1)) || (*(pstring+i)-32) == (*(pstring + (strlen(string)-i-1))) || *(pstring+i) == (*(pstring + (strlen(string)-i-1))-32)){
+        if(*(pstring+i) == *(pstring + (strlen(string)-i-1)) || 
+        (*(pstring+i)-32) == (*(pstring + (strlen(string)-i-1))) || 
+        *(pstring+i) == (*(pstring + (strlen(string)-i-1))-32)){
             NULL;
         }else{
             return 0;
