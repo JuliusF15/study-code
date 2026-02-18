@@ -5,6 +5,9 @@ int main(int argc, char **argv){
     for(int i=0; i<argc; i++){
         printf("\nArgument %d at Address %X has content: %s (length: %d)", i, argv[i], argv[i], strlen(argv[i]));
     }
+    for(int i=0; i<argc; i++){
+        printf("\nArgument %d at Address %X has content: %s (length: %d)", i, *(argv+i), *(argv+i), strlen(*(argv+i)));
+    }
 }
 
 //Argument 0 at address "000001A174C03D00" has 
