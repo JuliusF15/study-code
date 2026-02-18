@@ -2,13 +2,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int NUM_CELLS = 20;
+int NUM_CELLS = 10;
 
-int moveCells(int *parray, int *temp_array){
+int moveCells(int *parray){
     srand(time(NULL));
     for(int i=0; i<NUM_CELLS; i++){
-        int rand_num = rand() % 10;
         if(parray[i] == 1){
+            int rand_num = rand() % 10;
             if(rand_num < 5 && i != 0){
                 if(parray[i-1] == 0){
                     parray[i] = 0;
@@ -30,23 +30,11 @@ int moveCells(int *parray, int *temp_array){
             }
         }
     }
-    /*for(int i=0; i<NUM_CELLS; i++){
-        parray[i] = temp_array[i];
-    }*/
-   
 }
 
-int sim(int *parray){
-    int temp_array[NUM_CELLS] = {};
-    int *ptemp_array = temp_array;
-    for(int i=0; i<NUM_CELLS; i++){
-        temp_array[i] = parray[i];
-    }
-    moveCells(parray, temp_array);
-
-}
 int main(){
-    int array[20] = {0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0};
+    int array[10] = {0, 0, 1, 0, 1, 0, 1, 0, 1, 0};
+    int *parray = array;
     int i = 0;
     for(int i=0; i<NUM_CELLS; i++){
         printf("%d", array[i]);
@@ -54,12 +42,11 @@ int main(){
     while(1){
         int last_time = clock();
         if(clock() % 1000 == 0 && last_time != clock()){
-            sim(array);
+            moveCells(parray);
             printf("\n");
             for(int i=0; i<NUM_CELLS; i++){
                 printf("%d", array[i]);
-            }
-            
+            }            
         }
     }
 
