@@ -34,7 +34,7 @@ void read_file(struct Sensor *Sensor, struct SensorData *SensorData){
     double time, prob;
     int counter = 0;
     while (fgets(text, sizeof(text), pfile) != NULL) {
-        if (sscanf(text, "%lf %lf", &time, &prob) == 2) {
+        if (sscanf(text, "%lf %lf", &time, &prob) == 2) { //liest genau die datentypen die man ihm gibt aus
             SensorData->probability = prob;
             SensorData->time = time;
             Sensor->data[counter] = *SensorData;
