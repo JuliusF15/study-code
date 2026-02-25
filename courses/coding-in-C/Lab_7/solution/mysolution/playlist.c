@@ -139,7 +139,7 @@ int main(){
     print_Playlist(&myPlaylist);
 
     delete_Songs(&myPlaylist);
-    delete_Playlist(&myPlaylist);
+    //delete_Playlist(&myPlaylist);
 
     return 0;
 }
