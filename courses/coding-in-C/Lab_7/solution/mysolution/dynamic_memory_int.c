@@ -5,12 +5,15 @@ int main() {
     int N;
 
     printf("Enter an integer: ");
-    scanf("%d", &N);
+    if (scanf("%d", &N) != 1){
+        printf("\nError");
+        return 1;
+    }
 
     
-    int *mptr = malloc(sizeof(*mptr)); // Speicher für ein int reservieren
-    if (mptr == NULL) {     // Prüfen ob malloc erfolgreich war
-        printf("Memory allocation failed.\n");
+    int *mptr = malloc(sizeof(*mptr)); // Speicher für ein int reservieren; malloc braucht die Größe in Bits die er freigeben soll; Void pointer hat kein Datentyp kann also auf alle variablentypen zeigen
+    if (mptr == NULL) {     // Prüfen ob malloc erfolgreich war, wenn nicht gibt es immer NULL zurück (calloc und realloc auch)
+        printf("\nMemory allocation failed.");
         return 1;
     }
     
@@ -26,11 +29,11 @@ int main() {
         printf("%d ", cptr[i]);
     }
     printf("\n");
-    int *ptemp = realloc(cptr, (N * 2) * sizeof(*cptr));
+    int *ptemp = realloc(cptr, (N * 2) * sizeof(*cptr)); //auch hier muss eine byte Anzahl als Größe angegeben werden
     if(ptemp == NULL){
         printf("Fehler beim vergrößern des Arrays!");
     }else{
-        cptr = ptemp;
+        cptr = ptemp; //hier temporäres Array benutzen, da bei einem Fehler vorher das alte array cptr mit NULL überchrieben werden würde
         //free(ptemp);
     }
     for(int i=N; i<N*2; i++){
@@ -47,7 +50,9 @@ int main() {
 
     // Speicher freigeben
     free(mptr);
-    free(cptr);
+    free(cptr); 
+    mptr = NULL;
+    cptr = NULL; //um dangling pointer zu verhindern
 
     return 0;
 }
