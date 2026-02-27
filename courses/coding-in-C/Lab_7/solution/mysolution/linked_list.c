@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Node{
+typedef struct Node{ //Grundlegenster Aufbau einer Node, immer mindestens so
     double data;
     struct Node *pnext;
 }Node;
@@ -41,15 +41,16 @@ void delete_List(Node *head){
 int main(){
     Node *current = NULL;
     Node *head = NULL;
+
     for(int i=0; i<50; i++){
         Node *newNode;
         newNode = create_Node(i);
-        if (head == NULL) {
+        if (head == NULL) { //wenn die Kette noch leer ist
             head = newNode;      // Head wird durch die erste Node ersetzt. Da es nur eine gibt, ist current diese Node
-            current = head;
-        }else {
-        current->pnext = newNode; //im bei der 2. Node wird der pnext vom Head auf diesen gelegt, dann wandert current zum nächsten. Bei der 3. Node wird der pnext von der 2.Node auf die Adresse der 3. gesetzt, da current == Node2 ist
-        current = newNode;
+            current = newNode;   //alle Nodes sind gleich
+        }else {                   //wenn schon Elemente in der Kette sind
+            current->pnext = newNode; //bei der 2. Node wird der pnext vom Head auf diesen gelegt, dann wandert current zum nächsten. Bei der 3. Node wird der pnext von der 2.Node auf die Adresse der 3. gesetzt, da current == Node2 ist
+            current = newNode;
         }
     }
     Node *newNode;

@@ -54,8 +54,10 @@ void delete_first_Song(Playlist *Playlist){
     Song *tmp = Playlist->firstSong;
     Playlist->firstSong = Playlist->firstSong->pnext;
     char *name = tmp->songName;
-    free(tmp);
     printf("\nDeleted Song:%s", name);
+    free(tmp->songName);
+    free(tmp->artist);
+    free(tmp);
     return;
 
 }
@@ -79,32 +81,24 @@ void delete_Songs(Playlist *Playlist){
     Playlist->current = NULL;
     Playlist->firstSong = NULL;
 }
-/*void delete_Playlist(Playlist *Playlist){
-    delete_Songs(Playlist);
-    free(Playlist);
-    Playlist = NULL;
-    printf("\nDeleted Playlist!");
-}*/
+
 void print_Playlist(Playlist *playlist){
     Song *tmp = playlist->firstSong;
-    if(playlist->firstSong == NULL){
+
+    if(tmp == NULL){
         printf("\nPlaylist is empty!");
         return;
     }
-    while(tmp->pnext != NULL){
+
+    while(tmp != NULL){
         printf("\nTitle: %s, Artist: %s", tmp->songName, tmp->artist);
         tmp = tmp->pnext;
-        if(tmp->pnext == NULL){
-            printf("\nTitle: %s, Artist: %s", tmp->songName, tmp->artist);
-
-        }
     }
-    return;
-
 }
+
 void initPlaylist(Playlist *pplaylist){
-    pplaylist = malloc(sizeof(pplaylist));
     pplaylist->firstSong = NULL;
+    pplaylist->current = NULL;
     return;
 }
 int main(){
@@ -139,7 +133,6 @@ int main(){
     print_Playlist(&myPlaylist);
 
     delete_Songs(&myPlaylist);
-    //delete_Playlist(&myPlaylist);
 
     return 0;
 }
