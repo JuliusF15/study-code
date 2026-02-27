@@ -68,7 +68,7 @@ Section II will focus on how to use standard library <assert.h> to create and ex
 void test_init_playlist(void)
 {
     Playlist p;
-    init_playlist(&p);
+    initPlaylist(&p);
 
     assert(p.p_head == NULL);
     assert(p.size == 0);
