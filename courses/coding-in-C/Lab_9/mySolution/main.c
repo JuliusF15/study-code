@@ -26,10 +26,14 @@ int main(){
     print_Playlist(&myPlaylist);
     int count = count_songs_recursive(myPlaylist.firstSong);
     printf("\n%d", count);
-/*
-    Song *song = find_song_by_title(&myPlaylist, "Fotoshop");
-    printf("\n%s", song->artist);
-*/
+
+    Song *song = find_song_by_title(&myPlaylist, "Fotosop");
+    if(song == NULL){
+        printf("\nSong Not Found!");
+    }else{
+        printf("\n%s", song->artist);
+    }
+
     delete_first_Song(&myPlaylist);
     print_Playlist(&myPlaylist);
     count = count_songs_recursive(myPlaylist.firstSong);

@@ -5,7 +5,7 @@
 
 Song* find_song_by_title(Playlist *playlist, const char *title){
     Song *tmp = playlist->firstSong;
-    while(playlist->current->pnext != NULL){
+    while(tmp->pnext != NULL){
         char test = strcmp(tmp->songName, title);
         if(test == 0){
             return tmp;
@@ -18,8 +18,29 @@ Song* find_song_by_title(Playlist *playlist, const char *title){
 }
 
 int count_songs_recursive(const Song *current){
-    
+    if(current == NULL){
+        return 0;
+    }
+    return 1 + count_songs_recursive(current->pnext);
 
+}
+
+void sort_playlist_by_title(Playlist *playlist){
+    Song *pivot = playlist->firstSong;
+    Song *tmpLeft = playlist->firstSong;
+    for(int i=0; i<playlist->playlist_lenght/2; i++){
+        pivot = pivot->pnext;
+    }
+    Song *tmpRight = pivot->pnext;
+    char sorting = '1';
+    while(sorting == '1'){
+        if((int)tmpLeft->songName[0] < (int)pivot->songName[0]){
+            tmpLeft = tmpLeft->pnext;
+        }
+        if((int)tmpRight->songName[0] > (int)pivot->songName[0]){
+            tmpRight = tmpRight->pnext;
+        }
+    }
 }
 
 void addSong(Playlist *playlist, char *songName, char *artistName){
