@@ -2,6 +2,7 @@
 #include <string>
 #include <cstdint>
 #include <limits>
+#include <iomanip>
 #include "Functions.hpp"
 
 void readStudentData(std::string &name, std::uint_least16_t &homework, std::uint_least16_t &midterm, std::uint_least16_t &finalExam){
@@ -71,5 +72,38 @@ void calculateGrade(std::uint_least16_t &homework, std::uint_least16_t &midterm,
     else if(finalGrade < GRADE_E_VAL){
         letterGrade = 'F';
     }
+
+}
+
+void printReport(std::string name, std::uint_least16_t homework, std::uint_least16_t midterm, std::uint_least16_t finalExam, std::string letterGrade, double finalGrade){
+    const int SPACES = 15;
+    std::string status = "N.D.";
+    if(letterGrade == "A" || letterGrade == "B" || letterGrade == "C"){
+        status = "PASS";
+    }else if(letterGrade == "D" || letterGrade == "E"){
+        status = "CONDITIONAL PASS;";
+    }else if(letterGrade == "F"){
+        status = "FAIL";
+    }
+    
+    std::cout << "-------------------------------------" << std::endl;
+    std::cout << "Student Report" << std::endl;
+    std::cout << "-------------------------------------" << std::endl;
+    std::cout << "Name: " << name << std::endl;
+    std::cout << std::endl;
+    std::cout << "Scores" << std::endl;
+    std::cout << "-------------------------------------" << std::endl;
+    std::cout << std::left << std::setw(SPACES) << "Homework:" << homework << std::endl;
+    std::cout << std::left << std::setw(SPACES) << "Midterm:" << midterm << std::endl;
+    std::cout << std::left << std::setw(SPACES) << "Final Exam:" << finalExam << std::endl;
+    std::cout << std::endl;
+    std::cout << std::left << std::setw(SPACES) << "Final Grade:" << std::setprecision(4) << finalGrade << std::endl;
+    std::cout << std::left << std::setw(SPACES) << "Letter Grade:" << letterGrade << std::endl;
+    std::cout << std::left << std::setw(SPACES) << "Status:" << status << std::endl;
+    std::cout << "-------------------------------------" << std::endl;
+
+
+
+
 
 }

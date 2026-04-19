@@ -10,7 +10,13 @@ int main(){
     std::uint_least16_t homework;
     std::uint_least16_t midterm;
     std::uint_least16_t finalExam;
+    double finalGrade;
+    std::string letterGrade;
+    
     readStudentData(name, homework, midterm, finalExam);
+    calculateGrade(homework, midterm, finalExam, letterGrade, finalGrade);
+    printReport(name, homework, midterm, finalExam, letterGrade, finalGrade);
 
-    std::cout << name << homework << midterm << finalExam << std::endl;
+    std::cout << finalGrade << " " << letterGrade << std::endl;
+
 }
