@@ -102,8 +102,4 @@ void printReport(std::string name, std::uint_least16_t homework, std::uint_least
     std::cout << std::left << std::setw(SPACES) << "Status:" << status << std::endl;
     std::cout << "-------------------------------------" << std::endl;
 
-
-
-
-
 }
