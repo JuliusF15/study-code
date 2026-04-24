@@ -8,6 +8,8 @@ class BankAccount{
         string owner;
         double balance;
     public:
+        BankAccount() : balance(0){        }
+
         void setOwner(string owner){
             this->owner = owner;
         }

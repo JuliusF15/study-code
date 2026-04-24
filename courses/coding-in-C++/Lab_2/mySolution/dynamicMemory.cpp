@@ -7,14 +7,14 @@ class Note{
     private:
         string* text;
     public:
-        Note(string text_inp){
-            text = new string;
+        Note(string text_inp){//Konstruktor
+            text = new string; //an der Stelle ist new eigentlich unnötig, wenn man es aber benutzt, ist das der richtige Weg
             *text = text_inp;
 
         };
-        Note(Note& t){ //Konstructor
+        Note(Note& t){ //Copy-Konstructor
             text = new string;
-            *text = *t.text;
+            *text = *(t.text);
         }
         ~Note(){  //Dekonstructor wird immer am Ende des Programms aufgerufen
             delete text;
