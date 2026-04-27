@@ -14,7 +14,7 @@
 class SearchQuery
 {
 private:
-    static constexpr int DEFAULT_MAX_RESULTS = 3;
+    static /*constexpr*/ const int DEFAULT_MAX_RESULTS = 3;
 
     std::string query;
     int max_results;

@@ -14,7 +14,7 @@
 class WebResource
 {
 private:
-    static constexpr int POPULARITY_THRESHOLD = 80;
+    static /*constexpr*/ const int POPULARITY_THRESHOLD = 80;
 
     std::string url;
     std::string content;

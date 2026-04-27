@@ -17,7 +17,7 @@
 class SearchEngine
 {
 private:
-    static constexpr int MAX_WEB_RESOURCES = 100;
+    static /*constexpr*/ const int MAX_WEB_RESOURCES = 100;
     static int total_queries;
 
     WebResource web_resources[MAX_WEB_RESOURCES];
