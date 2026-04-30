@@ -23,7 +23,7 @@ class DrinkBuilder{
 
     public:
         DrinkBuilder(): //Konstruktor
-        name("NoName"), sugar(DEFAULT_SUGAR), temperature(DEFAULT_TEMPERATURE), withMilk(DEFAULT_MILKSTATE)
+        name("NoName"), sugar(DEFAULT_SUGAR), temperature(DEFAULT_TEMPERATURE), withMilk(DEFAULT_MILKSTATE) //Initialisierungsliste ist besser, da es effizienter als normale Konstruktoren ist 
         {
         }
 

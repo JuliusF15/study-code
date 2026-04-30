@@ -9,7 +9,7 @@ class Note{
     public:
         Note(string text_inp){//Konstruktor
             text = new string; //an der Stelle ist new eigentlich unnötig, wenn man es aber benutzt, ist das der richtige Weg
-            *text = text_inp;
+            *text = text_inp; //ohne Copy Konstructor wird ein standart Copy Konstuctor gebaut, wenn man eine Node mit einer Node erzeugt. Dort zeigen dann beide Pointer von "new" auf die selbe Adresse. Beim Löschen wird trotzdem zweimal aufgerufen, was zu undefined behavior führt
 
         };
         Note(Note& t){ //Copy-Konstructor
@@ -25,7 +25,7 @@ class Note{
 };
 
 int main(){
-    Note Text("Hlalal");
+    Note Text("Hlalal"); 
     Note Text2(Text);
     Text.display();
     Text2.display();
