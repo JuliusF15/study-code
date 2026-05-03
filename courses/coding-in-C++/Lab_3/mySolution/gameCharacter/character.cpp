@@ -60,3 +60,7 @@ bool Character::isInventoryFull(){
     }
     return true;
 }
+
+Item Character::getItemfromInventory(int index){
+    return inventory[index];
+}

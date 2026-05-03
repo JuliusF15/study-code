@@ -7,6 +7,8 @@ class Item{
     protected:
         std::string name;
     public:
+        Item(std::string name): name(name){};
+        Item(){};
         Item& getName(){
             std::cout << name << std::endl;
             return *this;

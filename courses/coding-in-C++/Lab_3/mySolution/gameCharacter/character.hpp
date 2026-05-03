@@ -24,6 +24,7 @@ class Character {
         Character& healthDown(int health_down);
         Character& addItemToInventory(Item item);
         Character& removeLastItem();
+        Item getItemfromInventory(int index);
         bool isInventoryFull();
 };
 
