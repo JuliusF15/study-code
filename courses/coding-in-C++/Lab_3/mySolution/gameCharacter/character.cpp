@@ -64,3 +64,17 @@ bool Character::isInventoryFull(){
 Item Character::getItemfromInventory(int index){
     return inventory[index];
 }
+
+Item Character::getWeaponFromInventory(){
+    for(int i=0; i<MAX_INVENTORY; i++){
+        if(inventory[i].getNameString() )
+    }
+}
+
+Character& Character::printStatus(){
+    std::cout << "Name: " << name << std::endl;
+    std::cout << "Health Points: " << healthPoints << std::endl;
+    std::cout << "Level: " << level << std::endl;
+    std::cout << "Name: " << name << std::endl;
+    std::cout << "Name: " << name << std::endl;
+}

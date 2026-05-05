@@ -25,7 +25,10 @@ class Character {
         Character& addItemToInventory(Item item);
         Character& removeLastItem();
         Item getItemfromInventory(int index);
+        Item getWeaponFromInventory();
         bool isInventoryFull();
+        Character& printStatus();
+        
 };
 
 #endif
