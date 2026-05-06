@@ -6,15 +6,17 @@
 class Item{
     protected:
         std::string name;
+        std::string type;
     public:
-        Item(std::string name): name(name){};
+        Item(std::string name): name(name), type("Generic"){};
+        Item(std::string name, std::string type): name(name), type(type){};
         Item(){};
-        Item& getName(){
-            std::cout << name << std::endl;
-            return *this;
-        }
-        std::string getNameString(){
+        
+        std::string getName(){
             return name;
+        }
+        std::string getType(){
+            return type;
         }
 };
 

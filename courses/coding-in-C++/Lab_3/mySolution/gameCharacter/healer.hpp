@@ -6,12 +6,10 @@
 
 class Healer: public Mage{
     protected:
-        int manaSkill;
-        std::string type;
 
     public:
-        Healer(std::string name, int level, int healthPoints, bool hasWeapon):Mage(name, level, healthPoints, hasWeapon), type("healer") {};
-        Healer& regenManaPoints();
+        Healer(std::string name, int level, int healthPoints, bool hasWeapon, int manaSkill):Mage(name, "Healer", level, healthPoints, hasWeapon, manaSkill) {};
+        Healer& heal(Character& target);
 };
 
 #endif
