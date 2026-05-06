@@ -25,10 +25,15 @@ Character& Character::healthUp(int health_up){
 };
 
 Character& Character::healthDown(int health_down){
-    healthPoints = healthPoints + health_down;
+    healthPoints = healthPoints - health_down;
     return *this;
 
 };
+
+Character& Character::changeWeaponStatus(bool ChangeHasWeapon){
+    this->hasWeapon = ChangeHasWeapon;
+    return *this;
+}
 
 Character& Character::addItemToInventory(Item* item){
     for(int i=0; i < MAX_INVENTORY; i++){
@@ -51,6 +56,7 @@ Character& Character::removeLastItem(){
     for(int i=MAX_INVENTORY-1; i>=0; i--){
         if(inventory[i] != nullptr){
             delete inventory[i];
+            inventory[i] = nullptr;
             return *this;
         }
     }
@@ -66,9 +72,24 @@ bool Character::isInventoryFull(){
     }
     return true;
 }
+Item* Character::removeItemfromInventory(int index){
+    if(index >= 0 && index < MAX_INVENTORY){
+        if(inventory[index] != nullptr){
+            Item* item = inventory[index];
+            inventory[index] = nullptr;
+            return item;
+        }else{
+            std::cout << "No Item in Slot: " << index << std::endl;
+        }
+    }
+    return nullptr;
+}
 
-Item* Character::getItemfromInventory(int index) const{
-    return inventory[index];
+Item* Character::getItemfromInventory(int index){
+    if(index >= 0 && index < MAX_INVENTORY){
+        return inventory[index];
+    }
+    return nullptr;
 }
 
 Item* Character::getWeaponFromInventory() const{

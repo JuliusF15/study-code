@@ -7,8 +7,6 @@
 class Weapon: public Item{
     protected:
         int damageValue;
-        std::string type;
-
     public:
         Weapon(std::string name, int damageValue):Item(name, "Weapon"), damageValue(damageValue) {};
 

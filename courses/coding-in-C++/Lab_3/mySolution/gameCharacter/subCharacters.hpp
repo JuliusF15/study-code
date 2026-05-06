@@ -9,8 +9,8 @@ class Mage: public Character{
         int manaSkill;
 
     public:
-        Mage(std::string name, int level, int healthPoints, bool hasWeapon, int manaSkill):Character(name, "Mage", level, healthPoints, hasWeapon), manaSkill(manaSkill) {};
-        Mage(std::string name, std::string type, int level, int healthPoints, bool hasWeapon, int manaSkill):Character(name, type, level, healthPoints, hasWeapon), manaSkill(manaSkill) {};
+        Mage(std::string name, int level, int healthPoints, int manaSkill):Character(name, "Mage", level, healthPoints), manaSkill(manaSkill) {};
+        Mage(std::string name, std::string type, int level, int healthPoints, int manaSkill):Character(name, type, level, healthPoints), manaSkill(manaSkill) {};
         Mage& regenManaPoints(int points);
 
         void printStatus() const override;
@@ -19,11 +19,10 @@ class Mage: public Character{
 class Warrior: public Character{
     protected:
         int weaponSkill;
-        std::string type;
 
     public:
-        Warrior(std::string name, int level, int healthPoints, bool hasWeapon, int weaponSkill):Character(name, "Warrior", level, healthPoints, hasWeapon), weaponSkill(weaponSkill) {};
-        Warrior(std::string name, std::string type, int level, int healthPoints, bool hasWeapon, int weaponSkill):Character(name, type, level, healthPoints, hasWeapon), weaponSkill(weaponSkill) {};
+        Warrior(std::string name, int level, int healthPoints, int weaponSkill):Character(name, "Warrior", level, healthPoints), weaponSkill(weaponSkill) {};
+        Warrior(std::string name, std::string type, int level, int healthPoints, int weaponSkill):Character(name, type, level, healthPoints), weaponSkill(weaponSkill) {};
         Warrior& regenWeaponPoints(int points);
 
         void printStatus() const override;
@@ -33,7 +32,7 @@ class Healer: public Mage{
     protected:
 
     public:
-        Healer(std::string name, int level, int healthPoints, bool hasWeapon, int manaSkill):Mage(name, "Healer", level, healthPoints, hasWeapon, manaSkill) {};
+        Healer(std::string name, int level, int healthPoints, int manaSkill):Mage(name, "Healer", level, healthPoints, manaSkill) {};
         Healer& heal(Character& target);
 };
 
@@ -41,7 +40,7 @@ class Thief: public Warrior{
     protected:
 
     public:
-        Thief(std::string name, int level, int healthPoints, bool hasWeapon, int weaponSkill):Warrior(name, "Thief", level, healthPoints, hasWeapon, weaponSkill) {};
+        Thief(std::string name, int level, int healthPoints, int weaponSkill):Warrior(name, "Thief", level, healthPoints, weaponSkill) {};
         Thief& steal(Character& target, int index);
     };
 

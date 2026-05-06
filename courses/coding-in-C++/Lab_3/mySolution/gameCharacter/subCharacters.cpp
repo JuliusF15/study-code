@@ -2,6 +2,8 @@
 
 Mage& Mage::regenManaPoints(int points){
     manaSkill = manaSkill + points;
+    return *this;
+
 }
 
 void Mage::printStatus() const{
@@ -24,12 +26,13 @@ void Mage::printStatus() const{
 
 Warrior& Warrior::regenWeaponPoints(int points){
     weaponSkill = weaponSkill + points;
+    return *this;
 }
 void Warrior::printStatus() const{
     std::cout << "Name: " << name << std::endl;
     std::cout << "Type: " << type << std::endl;
     std::cout << "Health Points: " << healthPoints << std::endl;
-    std::cout << "Mana Points:" << weaponSkill << std::endl;
+    std::cout << "Weapon Points:" << weaponSkill << std::endl;
     std::cout << "Level: " << level << std::endl;
     
     if(this->getWeaponFromInventory() != nullptr){
@@ -46,6 +49,7 @@ void Warrior::printStatus() const{
 Healer& Healer::heal(Character& target){
     target.healthPoints++;
     std::cout << "Healed " << target.getName() << std::endl;
+    return *this;
 }
 
 //-------------Thief-------------//
@@ -55,9 +59,18 @@ Thief& Thief::steal(Character& target, int index){
         std::cout << "Can't steal if Inventory is full!!" << std::endl;
     }else{
         if(weaponSkill > target.getLevel()){
-            this->addItemToInventory(target.getItemfromInventory(index));
+            Item* stolenItem = target.removeItemfromInventory(index);
+            this->addItemToInventory(stolenItem);
+            if(stolenItem == nullptr){
+                std::cout << "Nohing to steal at slot " << index << std::endl;
+            }else if(stolenItem->getType() == "Weapon"){
+                this->changeWeaponStatus(true);
+                target.changeWeaponStatus(false);
+            }
+            
         }else{
             std::cout << "Target is to Strong" << std::endl;
         }
     }
+    return *this;
 }
