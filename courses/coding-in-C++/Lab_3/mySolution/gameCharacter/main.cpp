@@ -1,14 +1,12 @@
 #include "character.hpp"
-#include "healer.hpp"
 #include "Item.hpp"
-#include "mage.hpp"
-#include "warrior.hpp"
+#include "subCharacters.hpp"
 
 int main() {
     std::cout << "========== MAGE OBJECT TEST ==========" << std::endl << std::endl;
 
     // Create a Mage object
-    Mage mage("Gandalf", 5, 100, false);
+    Mage mage("Gandalf", 5, 100, false, 20);
 
     std::cout << "--- Basic Information ---" << std::endl;
     std::cout << "Name: " << mage.getName() << std::endl;
@@ -56,8 +54,8 @@ int main() {
     std::cout << std::endl;
 
     Item ball("Ball");
-    mage.addItemToInventory(ball);
-    std::cout << "Item at Index 0: " << mage.getItemfromInventory(0).getNameString() << std::endl;    
+    mage.addItemToInventory(&ball);
+    std::cout << "Item at Index 0: " << mage.getItemfromInventory(0)->getName() << std::endl;    
 
     std::cout << "========== END OF TESTS ==========" << std::endl;
 

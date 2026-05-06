@@ -33,6 +33,12 @@ Character& Character::healthDown(int health_down){
 Character& Character::addItemToInventory(Item* item){
     for(int i=0; i < MAX_INVENTORY; i++){
         if(inventory[i] == nullptr){
+            if(item->getType() == "Weapon" && hasWeapon == false){
+                hasWeapon = true;
+            }else if(item->getType() == "Weapon" && hasWeapon == true){
+                std::cout << "Only one Weapon is allowed!" << std::endl;
+                return *this;
+            }
             inventory[i] = item;
             return *this;
         }
@@ -91,11 +97,11 @@ void Character::printStatus() const{
     std::cout << "No Character specific Points" << std::endl;
     std::cout << "Level: " << level << std::endl;
     
-    if(getWeaponFromInventory() != nullptr){
-        std::cout << "Weapon: " << getWeaponFromInventory()->getName() << std::endl;
+    if(this->getWeaponFromInventory() != nullptr){
+        std::cout << "Weapon: " << this->getWeaponFromInventory()->getName() << std::endl;
     }else{
         std::cout << "No Weapon in Inventory" << std::endl;
     }
 
-    std::cout << "Items in Inventory: " << getNumOfUsedSlots() << "/" << MAX_INVENTORY << std::endl;
+    std::cout << "Items in Inventory: " << this->getNumOfUsedSlots() << "/" << MAX_INVENTORY << std::endl;
 }

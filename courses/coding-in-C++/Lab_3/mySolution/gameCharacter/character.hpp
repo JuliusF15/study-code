@@ -23,13 +23,14 @@ class Character {
         Character& levelDown(int levels_down);
         Character& healthUp(int health_up);
         Character& healthDown(int health_down);
+
         Character& addItemToInventory(Item* item);
         Character& removeLastItem();
-
         Item* getItemfromInventory(int index) const;
         Item* getWeaponFromInventory() const;
         int getNumOfUsedSlots() const;
         bool isInventoryFull();
+        
         virtual void printStatus() const;
         
 };

@@ -2,7 +2,7 @@
 #define HEALER_HPP
 #include <iostream>
 #include <string>
-#include "mage.hpp"
+#include "subCharacters.hpp"
 
 class Healer: public Mage{
     protected:

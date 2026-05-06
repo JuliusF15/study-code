@@ -11,16 +11,16 @@ void Mage::printStatus() const{
     std::cout << "Mana Points:" << manaSkill << std::endl;
     std::cout << "Level: " << level << std::endl;
     
-    if(getWeaponFromInventory() != nullptr){
-        std::cout << "Weapon: " << getWeaponFromInventory()->getName() << std::endl;
+    if(this->getWeaponFromInventory() != nullptr){
+        std::cout << "Weapon: " << this->getWeaponFromInventory()->getName() << std::endl;
     }else{
         std::cout << "No Weapon in Inventory" << std::endl;
     }
 
-    std::cout << "Items in Inventory: " << getNumOfUsedSlots() << "/" << MAX_INVENTORY << std::endl;
+    std::cout << "Items in Inventory: " << this->getNumOfUsedSlots() << "/" << MAX_INVENTORY << std::endl;
 }
 
-
+//-------------WARRIOR-------------//
 
 Warrior& Warrior::regenWeaponPoints(int points){
     weaponSkill = weaponSkill + points;
@@ -32,11 +32,32 @@ void Warrior::printStatus() const{
     std::cout << "Mana Points:" << weaponSkill << std::endl;
     std::cout << "Level: " << level << std::endl;
     
-    if(getWeaponFromInventory() != nullptr){
-        std::cout << "Weapon: " << getWeaponFromInventory()->getName() << std::endl;
+    if(this->getWeaponFromInventory() != nullptr){
+        std::cout << "Weapon: " << this->getWeaponFromInventory()->getName() << std::endl;
     }else{
         std::cout << "No Weapon in Inventory" << std::endl;
     }
 
-    std::cout << "Items in Inventory: " << getNumOfUsedSlots() << "/" << MAX_INVENTORY << std::endl;
+    std::cout << "Items in Inventory: " << this->getNumOfUsedSlots() << "/" << MAX_INVENTORY << std::endl;
+}
+
+//-------------HEALER-------------//
+
+Healer& Healer::heal(Character& target){
+    target.healthPoints++;
+    std::cout << "Healed " << target.getName() << std::endl;
+}
+
+//-------------Thief-------------//
+
+Thief& Thief::steal(Character& target, int index){
+    if(this->isInventoryFull()){
+        std::cout << "Can't steal if Inventory is full!!" << std::endl;
+    }else{
+        if(weaponSkill > target.getLevel()){
+            this->addItemToInventory(target.getItemfromInventory(index));
+        }else{
+            std::cout << "Target is to Strong" << std::endl;
+        }
+    }
 }

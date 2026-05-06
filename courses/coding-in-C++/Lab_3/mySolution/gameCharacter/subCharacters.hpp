@@ -37,4 +37,12 @@ class Healer: public Mage{
         Healer& heal(Character& target);
 };
 
+class Thief: public Warrior{
+    protected:
+
+    public:
+        Thief(std::string name, int level, int healthPoints, bool hasWeapon, int weaponSkill):Warrior(name, "Thief", level, healthPoints, hasWeapon, weaponSkill) {};
+        Thief& steal(Character& target, int index);
+    };
+
 #endif
