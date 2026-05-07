@@ -1,18 +1,20 @@
-# Mindestversion von CMake
-cmake_minimum_required(VERSION 3.10)
-
-# Projektname und Sprache
-project(SearchEngine LANGUAGES CXX)
-
-# C++ Standard
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
-# Alle Quellcodes
-set(SOURCES
-    main.cpp
-    webResource.cpp
-    )
-
-# Executable erstellen
-add_executable(SearchEngine ${SOURCES})
+cmake_minimum_required(VERSION 3.16)
+project(SearchEngineApp
+VERSION 1.0
+LANGUAGES CXX
+)
+add_executable(searchEngineApp
+searchengine_main.cpp
+searchEngine.cpp
+searchQuery.cpp
+webResource.cpp
+)
+target_compile_features(searchEngineApp PRIVATE cxx_std_17)
+set_target_properties(searchEngineApp PROPERTIES
+CXX_STANDARD 17
+CXX_STANDARD_REQUIRED YES
+CXX_EXTENSIONS NO
+)
+target_include_directories(searchEngineApp PRIVATE
+${CMAKE_CURRENT_SOURCE_DIR}
+)   
