@@ -31,7 +31,7 @@ Warrior& Warrior::regenWeaponPoints(int points){
 void Warrior::printStatus() const{
     std::cout << "Name: " << name << std::endl;
     std::cout << "Type: " << type << std::endl;
-    std::cout << "Health Points: " << healthPoints << std::endl;
+    std::cout << "Health Points: " << this->getHealthPoints() << std::endl;
     std::cout << "Weapon Points:" << weaponSkill << std::endl;
     std::cout << "Level: " << level << std::endl;
     

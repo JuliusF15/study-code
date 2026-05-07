@@ -9,12 +9,20 @@ int Character::getLevel(){
 };
 
 Character& Character::levelUp(int levels_up){
-    level = level + levels_up;
+    if(level+levels_up <= 10){
+        level = level + levels_up;
+    }else{
+        std::cout << "max Level" << std::endl;
+    }
     return *this;
 };
 
 Character& Character::levelDown(int levels_down){
-    level = level - levels_down;
+    if(level-levels_down > 0){
+        level = level - levels_down;
+    }else{
+        std::cout << "Level to low" << std::endl;
+    }
     return *this;
 };
 
@@ -109,6 +117,10 @@ int Character::getNumOfUsedSlots() const{
         }
     }
     return counter;
+}
+
+int Character::getHealthPoints() const{
+    return healthPoints;
 }
 
 void Character::printStatus() const{

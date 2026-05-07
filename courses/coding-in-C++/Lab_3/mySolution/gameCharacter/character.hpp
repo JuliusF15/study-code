@@ -5,17 +5,19 @@
 #include "Item.hpp"
 
 class Character {
+    private:
+        int healthPoints;
+
     protected:
         static constexpr int MAX_INVENTORY = 10;
         std::string name;
         std::string type;
         int level;
-        int healthPoints;
         Item* inventory[MAX_INVENTORY] = {};
         bool hasWeapon;
         friend class Healer;
-
-    public:
+        
+        public:
         Character(std::string name, std::string type, int level, int healthPoints): name(name), type(type), level(level), healthPoints(healthPoints), hasWeapon(false) {};
         std::string getName();
         int getLevel();
@@ -31,6 +33,7 @@ class Character {
         Item* getItemfromInventory(int index);
         Item* getWeaponFromInventory() const;
         int getNumOfUsedSlots() const;
+        int getHealthPoints() const;
         bool isInventoryFull();
         
         virtual void printStatus() const;
