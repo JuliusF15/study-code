@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 template <typename T>
 void swap(T &a, T &b){
@@ -35,7 +36,17 @@ void telemetryTag(T1 value1, T2 value2, std::string label1, std::string label2){
     std::cout << label1 << ": " << value1 << " | " << label2 << value2 << std::endl;
 }
 
-void flightRecordAnalysis(std::vector<int> data){
-    for(i )
+void printVectorData(const std::vector<int> &data){
+    for(auto i: data){
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
 }
+
+void sortVectorData(std::vector<int> &data){
+    std::sort(data.begin(), data.end());
+}
+
+
+ 
 #endif

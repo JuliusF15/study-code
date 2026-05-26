@@ -16,4 +16,9 @@ int main(){
 
     std::cout << a << b << c << d << " " << smallValue << std::endl;
 
+    std::vector<int> v = {42, 17, 42, 5, 99, 17, 63, 12};
+    printVectorData(v);
+    sortVectorData(v);
+    printVectorData(v);
+
 }
