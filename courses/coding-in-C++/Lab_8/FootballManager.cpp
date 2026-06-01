@@ -37,7 +37,7 @@ InjuredPlayer::InjuredPlayer(const std::string &name, int age)
 {
 }
 
-void InjuredPlayer::train(int intensity)
+void InjuredPlayer::train(int intensity) //Liskov Substitution Principle
 {
     if (intensity > 30)
     {
@@ -87,7 +87,7 @@ void FootballManager::notify_player(const Player &player, const std::string &mes
     notifier.send(player, message);
 }
 
-void FootballManager::select_strategy(const std::string &strategy)
+void FootballManager::select_strategy(const std::string &strategy) //Verletzung Open Closed Prinzip
 {
     if (strategy == "offensive")
     {

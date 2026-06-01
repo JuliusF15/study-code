@@ -27,7 +27,7 @@ public:
     void train(int intensity) override;
 };
 
-class ClubService
+class ClubService  //Interface Segregation
 {
 public:
     virtual ~ClubService() = default;
@@ -49,7 +49,7 @@ public:
     void send(const Player &player, const std::string &message);
 };
 
-class FootballManager : public ClubService
+class FootballManager : public ClubService //Dependency Inversion
 {
 private:
     void select_strategy(const std::string &strategy);
