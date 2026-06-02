@@ -11,16 +11,12 @@ Vehicle::Vehicle(const std::string &vehicle_model)
 
 void Vehicle::accelerate(double amount_kmh)
 {
-    try
+    if (amount_kmh <= 0.0)
     {
-        if (amount_kmh <= 0.0)
-        {
-            throw std::invalid_argument("Acceleration must be positive.");
-        }
-    }
-    catch (const std::invalid_argument &e)
-    {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cout << "Acceleration must be positive!" << std::endl;    
+        return;    
+    }else if(amount_kmh > 100){
+        std::cout << "Acceleration cant be to high!" << std::endl;
         return;
     }
 
@@ -33,6 +29,10 @@ void Vehicle::brake(double amount_kmh)
 {
     if (amount_kmh <= 0.0)
     {
+        std::cout << "Brake Force must be positive!" << std::endl;
+        return; //Exception wäre besser
+    }else if(amount_kmh > 100){
+        std::cout << "Brake Force cant be to high!" << std::endl;
         return;
     }
 
@@ -41,18 +41,18 @@ void Vehicle::brake(double amount_kmh)
 
     if (speed_kmh < 0.0)
     {
-        speed_kmh = amount_kmh;
+        speed_kmh = 0.0; //macht keinen Sinn. Wenn Speed unter Null sollte auf Null gesetzt werden
     }
 }
 
 void Vehicle::steer(double angle)
 {
-    steering_angle = angle;
+    steering_angle = angle; //kein Imnput Test
 }
 
 void Vehicle::update_lane_offset(double offset)
 {
-    lane_offset_m = offset;
+    lane_offset_m = offset; //kein Input Test
 }
 
 double Vehicle::get_speed() const
@@ -70,7 +70,7 @@ double Vehicle::get_lane_offset() const
     return lane_offset_m;
 }
 
-std::string &Vehicle::get_model()
+const std::string &Vehicle::get_model() //const Rückgabetyp fehlt
 {
     return model;
 }

@@ -4,17 +4,20 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "bugHunt_vehicle.hpp"
+
+//schlechte Dokumentation, keine Beschreibungen 
 
 class DistanceSensor
 {
 private:
     std::string position;
     bool active;
+    double measured_distance_m; //warum public?
 
 public:
-    double measured_distance_m;
 
     DistanceSensor(const std::string &sensor_position,
                    double initial_distance_m);
@@ -27,7 +30,7 @@ public:
     bool is_active() const;
     std::string get_position() const;
 
-    bool operator<(const DistanceSensor &other) const;
+    bool operator>(const DistanceSensor &other) const;
     bool is_exactly_at_warning_distance(double warning_distance) const;
 
     void print_info() const;
@@ -36,12 +39,13 @@ public:
 class EmergencyBrakeSystem
 {
 private:
-    double critical_distance_m;
+    double critical_distance_m; 
+    static constexpr float emergency_brake_force = 30.0;
 
 public:
-    EmergencyBrakeSystem(double critical_distance);
+    EmergencyBrakeSystem(double critical_distance); 
 
-    void evaluate(Vehicle &vehicle, const DistanceSensor &front_sensor) const;
+    void evaluate(Vehicle &vehicle, const std::shared_ptr<DistanceSensor> front_sensor);
 };
 
 class LaneKeepingAssist
@@ -62,24 +66,27 @@ private:
     double target_speed_kmh;
     double minimum_distance_m;
 
+    static constexpr float standart_brake_force = 5.0;
+    static constexpr float standart_acceleration = 5.0;
+
 public:
     AdaptiveCruiseControl(double target_speed,
                           double minimum_distance);
 
     void evaluate(Vehicle &vehicle,
-                  const DistanceSensor &front_sensor) const;
+                  const std::shared_ptr<DistanceSensor> front_sensor) const;
 };
 
 class ParkingAssistant
 {
 private:
-    std::vector<DistanceSensor *> sensors;
+    std::vector<std::shared_ptr<DistanceSensor>> sensors;
     double warning_distance_m;
 
 public:
     ParkingAssistant(double warning_distance);
 
-    void add_sensor(DistanceSensor *sensor);
+    void add_sensor(std::shared_ptr<DistanceSensor> sensor);
     void print_warnings() const;
 };
 

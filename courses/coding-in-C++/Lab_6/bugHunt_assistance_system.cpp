@@ -38,14 +38,19 @@ std::string DistanceSensor::get_position() const
     return position;
 }
 
-bool DistanceSensor::operator<(const DistanceSensor &other) const
+bool DistanceSensor::operator>(const DistanceSensor &other) const //operator falsch
 {
     return measured_distance_m > other.measured_distance_m;
 }
 
 bool DistanceSensor::is_exactly_at_warning_distance(double warning_distance) const
 {
-    return measured_distance_m == warning_distance;
+    if(abs(measured_distance_m - warning_distance) < 0.000001){
+        return true;
+    }else{
+        return false;
+    }
+    //return measured_distance_m == warning_distance; //bei double funktioniert dieser Operator nicht
 }
 
 void DistanceSensor::print_info() const
@@ -61,17 +66,22 @@ EmergencyBrakeSystem::EmergencyBrakeSystem(double critical_distance)
 }
 
 void EmergencyBrakeSystem::evaluate(Vehicle &vehicle,
-                                    const DistanceSensor &front_sensor) const
+                                    const std::shared_ptr<DistanceSensor> front_sensor) //const ist irreführend
 {
-    if (!front_sensor.is_active())
-    {
-        return;
+    try{
+        if (!front_sensor->is_active())
+        {
+            throw std::runtime_error("Sensor is Inactive");
+            //return; //Error Handling
+        }
     }
-
-    if (front_sensor.get_distance() > critical_distance_m)
+    catch(const std::runtime_error &e){
+        std::cout << "Error: " << e.what() << std::endl;
+    }
+    if (front_sensor->get_distance() < critical_distance_m) //geter Funktion, muss kleiner als sein
     {
-        std::cout << "[EmergencyBrakeSystem] Emergency braking triggered.\n";
-        vehicle.brake(30.0);
+        std::cout << "[EmergencyBrakeSystem] Emergency braking triggered.\n"; 
+        vehicle.brake(emergency_brake_force);
     }
 }
 
@@ -110,27 +120,27 @@ AdaptiveCruiseControl::AdaptiveCruiseControl(double target_speed,
 }
 
 void AdaptiveCruiseControl::evaluate(Vehicle &vehicle,
-                                     const DistanceSensor &front_sensor) const
+                                     const std::shared_ptr<DistanceSensor> front_sensor) const
 {
-    if (!front_sensor.is_active())
+    if (!front_sensor->is_active())
     {
         return;
     }
 
-    if (front_sensor.get_distance() < minimum_distance_m)
+    if (front_sensor->get_distance() > minimum_distance_m) //größer als 
     {
         std::cout << "[AdaptiveCruiseControl] Vehicle ahead is close. Accelerating.\n";
-        vehicle.accelerate(5.0);
+        vehicle.accelerate(standart_acceleration); //magic Numbers
     }
     else if (vehicle.get_speed() < target_speed_kmh)
     {
         std::cout << "[AdaptiveCruiseControl] Increasing speed.\n";
-        vehicle.accelerate(5.0);
+        vehicle.accelerate(standart_acceleration);
     }
     else if (vehicle.get_speed() > target_speed_kmh)
     {
         std::cout << "[AdaptiveCruiseControl] Reducing speed.\n";
-        vehicle.brake(5.0);
+        vehicle.brake(standart_brake_force);
     }
 }
 
@@ -139,14 +149,14 @@ ParkingAssistant::ParkingAssistant(double warning_distance)
 {
 }
 
-void ParkingAssistant::add_sensor(DistanceSensor *sensor)
+void ParkingAssistant::add_sensor(std::shared_ptr<DistanceSensor> sensor)
 {
     sensors.push_back(sensor);
 }
 
 void ParkingAssistant::print_warnings() const
 {
-    for (DistanceSensor *sensor : sensors)
+    for (std::shared_ptr<DistanceSensor> sensor : sensors)
     {
         if (sensor != nullptr &&
             sensor->is_active() &&
