@@ -60,8 +60,14 @@ void DistanceSensor::print_info() const
     std::cout << "Active: " << std::boolalpha << active << "\n\n";
 }
 
+AssistanceFeature::AssistanceFeature(std::string systemName): systemName(systemName){};
+
+void AssistanceFeature::print_name(){
+    std::cout << "System: " << systemName << std::endl;
+}
+
 EmergencyBrakeSystem::EmergencyBrakeSystem(double critical_distance)
-    : critical_distance_m(critical_distance)
+    : AssistanceFeature("Emergency Brake System"), critical_distance_m(critical_distance)
 {
 }
 
@@ -114,13 +120,13 @@ void LaneKeepingAssist::evaluate(Vehicle &vehicle) const
 
 AdaptiveCruiseControl::AdaptiveCruiseControl(double target_speed,
                                              double minimum_distance)
-    : target_speed_kmh(target_speed),
+    : AssistanceFeature("Adaptive Cruise Control"), target_speed_kmh(target_speed),
       minimum_distance_m(minimum_distance)
 {
 }
 
 void AdaptiveCruiseControl::evaluate(Vehicle &vehicle,
-                                     const std::shared_ptr<DistanceSensor> front_sensor) const
+                                     const std::shared_ptr<DistanceSensor> front_sensor)
 {
     if (!front_sensor->is_active())
     {
@@ -145,7 +151,7 @@ void AdaptiveCruiseControl::evaluate(Vehicle &vehicle,
 }
 
 ParkingAssistant::ParkingAssistant(double warning_distance)
-    : warning_distance_m(warning_distance)
+    : AssistanceFeature("Parking Assistant"), warning_distance_m(warning_distance)
 {
 }
 
@@ -168,3 +174,4 @@ void ParkingAssistant::print_warnings() const
         }
     }
 }
+

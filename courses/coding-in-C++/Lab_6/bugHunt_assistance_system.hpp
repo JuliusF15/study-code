@@ -5,10 +5,22 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <string>
 
 #include "bugHunt_vehicle.hpp"
 
 //schlechte Dokumentation, keine Beschreibungen 
+
+class AssistanceFeature{
+    private:
+        std::string systemName;
+    
+    public:
+        AssistanceFeature(std::string systemName);
+        virtual void evaluate(Vehicle &vehicle, const std::shared_ptr<DistanceSensor>);
+        void print_name();
+        virtual ~AssistanceFeature();
+};
 
 class DistanceSensor
 {
@@ -36,7 +48,7 @@ public:
     void print_info() const;
 };
 
-class EmergencyBrakeSystem
+class EmergencyBrakeSystem : public AssistanceFeature
 {
 private:
     double critical_distance_m; 
@@ -45,7 +57,7 @@ private:
 public:
     EmergencyBrakeSystem(double critical_distance); 
 
-    void evaluate(Vehicle &vehicle, const std::shared_ptr<DistanceSensor> front_sensor);
+    void evaluate(Vehicle &vehicle, const std::shared_ptr<DistanceSensor> front_sensor) override;
 };
 
 class LaneKeepingAssist
@@ -60,7 +72,7 @@ public:
     void evaluate(Vehicle &vehicle) const;
 };
 
-class AdaptiveCruiseControl
+class AdaptiveCruiseControl : public AssistanceFeature
 {
 private:
     double target_speed_kmh;
@@ -73,11 +85,11 @@ public:
     AdaptiveCruiseControl(double target_speed,
                           double minimum_distance);
 
-    void evaluate(Vehicle &vehicle,
-                  const std::shared_ptr<DistanceSensor> front_sensor) const;
+    void evaluate (Vehicle &vehicle,
+                  const std::shared_ptr<DistanceSensor> front_sensor) override;
 };
 
-class ParkingAssistant
+class ParkingAssistant : public AssistanceFeature
 {
 private:
     std::vector<std::shared_ptr<DistanceSensor>> sensors;

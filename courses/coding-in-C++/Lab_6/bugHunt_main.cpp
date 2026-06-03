@@ -21,10 +21,20 @@ int main()
     std::cout << p_rear_sensor.use_count() << std::endl;
     std::cout << p_front_sensor.use_count() << std::endl;
 
+    std::vector<std::unique_ptr<AssistanceFeature>> assistanceSystemsVector;
+    
     EmergencyBrakeSystem emergency_brake(10.0);
     LaneKeepingAssist lane_assist(0.4, 5.0);
     AdaptiveCruiseControl cruise_control(80.0, 15.0);
     ParkingAssistant parking_assistant(1.5);
+
+    std::unique_ptr p_emergency_brake = std::make_unique<AssistanceFeature>(emergency_brake);
+    std::unique_ptr p_parking_assistant = std::make_unique<AssistanceFeature>(parking_assistant);
+    std::unique_ptr p_cruise_control = std::make_unique<AssistanceFeature>(cruise_control);
+
+    assistanceSystemsVector.push_back(p_emergency_brake);
+    assistanceSystemsVector.push_back(p_parking_assistant);
+    assistanceSystemsVector.push_back(p_cruise_control);
 
     parking_assistant.add_sensor(p_rear_sensor);
     parking_assistant.add_sensor(p_left_sensor);
