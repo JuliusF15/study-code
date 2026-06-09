@@ -6,7 +6,7 @@
 
 class SensorFailureError : public std::exception{
     public:
-    std::string what(){
+    const char* what() const noexcept{
         return "Sensor is unreachable";
     }
 };
